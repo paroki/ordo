@@ -1,0 +1,14 @@
+{
+  "name": "@ordo/core",
+  "version": "0.0.0",
+  "description": "Liturgical calendar engine: pure functions, no runtime dependencies, no display strings",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  }
+}
