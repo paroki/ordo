@@ -1,0 +1,13 @@
+{
+  "name": "@ordo/core",
+  "version": "0.0.0",
+  "description": "Mesin kalender liturgi: pure functions, tanpa dependency runtime, tanpa string tampilan",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  }
+}
