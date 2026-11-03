@@ -8,8 +8,10 @@ single source of truth.
 
 Ordo is an open source generator for the Catholic liturgical calendar. Every movable day is
 derived from the date of Easter; the rest is fixed-date celebration data plus precedence
-rules. Design decisions live in [`docs/adr`](docs/adr). Read ADR-0001 before making
-architectural changes, and add a new ADR when you change a decision.
+rules. Product requirements and milestones live in [`docs/PRD.md`](docs/PRD.md): check it
+before starting work, and update the milestone checklist and status in the same commit that
+completes an item. Design decisions live in [`docs/adr`](docs/adr). Read ADR-0001 before
+making architectural changes, and add a new ADR when you change a decision.
 
 Repository: `paroki/ordo`. Web app: React Router v8 (not created yet, planned in `apps/web`).
 

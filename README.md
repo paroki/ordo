@@ -10,7 +10,8 @@ An open source generator for the Catholic liturgical calendar.
 - `@ordo/core` contains pure functions, has no runtime dependencies, and never returns display strings.
 - Calendar (country), language and readings are three separate concerns.
 
-Design decisions are recorded in [docs/adr](docs/adr).
+Product requirements and the milestone roadmap are in [docs/PRD.md](docs/PRD.md). Design
+decisions are recorded in [docs/adr](docs/adr).
 
 ## Development
 
