@@ -9,8 +9,14 @@
 For M1 (liturgical time) we needed a reference, and we also needed evidence for the regional
 settings used in Indonesia. The maintainer proposed two sources:
 
-1. GCatholic.org, "Kalender Liturgi: Indonesia" (checked for 2024, 2026 and 2027).
+1. GCatholic.org, "Kalender Liturgi: Indonesia" (checked for 2024 to 2029).
 2. The My Avitalia blog post "Kalender Liturgi 2026 (A/II - B/I)".
+3. imankatolik.or.id, `kalender.php?b=<month>&t=<year>`. We could not use it: for both
+   `b=7&t=2023` and `b=1&t=2023` our page reader returned the current month (November
+   2026) regardless of the parameters, and the shell is blocked by the proxy. The page
+   shows a liturgical color and rank wording per day, names no source and shows no license.
+   It stays a candidate for color checks in M2 if a way to query it by month and year is
+   found.
 
 Neither is the official KWI ordo:
 
@@ -36,7 +42,7 @@ Neither is the official KWI ordo:
    mismatches, so the tests can fail. Extraction errors cannot be fully excluded.
 5. The regional settings observed in these sources are recorded as
    `OBSERVED_INDONESIAN_SETTINGS` in the fixtures only: Epiphany on Sunday, Ascension on
-   Thursday, Corpus Christi on Sunday. They are **not** shipped as the Indonesian calendar
+   Thursday, Corpus Christi on Sunday (consistent across 2024 to 2029). They are **not** shipped as the Indonesian calendar
    settings until verified against KWI documents (M3).
 
 ## Observations that affect the design
@@ -44,9 +50,15 @@ Neither is the official KWI ordo:
 - The Roman numerals I-IV that GCatholic prints next to many days are the **psalter week**
   of the Liturgy of the Hours (for example Ordinary Time week 5 shows I), not the lectionary
   cycle and not the season week. `@ordo/core` does not compute it (see PRD, open question 7).
-- 2024 contains the Monday Baptism of the Lord rule (Epiphany on Sunday 7 January, Baptism
-  on Monday 8 January, Ordinary Time week 1 starting on 9 January) and matches our
-  implementation. The 8 January case (2023) is not covered: the 2023 page could not be read.
+- 2024 and 2029 contain the Monday Baptism of the Lord rule (Epiphany on Sunday 7 January,
+  Baptism on Monday 8 January, Ordinary Time week 1 starting on 9 January) and match our
+  implementation. 2028 has the earliest possible Sunday Epiphany (2 January, Baptism on
+  Sunday 9 January) and also matches.
+- The 8 January Epiphany case (2023, Baptism on Monday 9 January) has no Indonesian
+  reference: the GCatholic 2023 page could not be read. A Philippine news headline found by
+  search ("Feast of the Baptism of the Lord on Jan 9", Manila Bulletin, 8 January 2023) is
+  consistent with the rule, but it concerns another country, was read by title only, and is
+  not used as a fixture.
 - Both sources number Ordinary Time Part II backwards from Christ the King (week 34), as
   `@ordo/core` does, including the omitted weeks when a solemnity replaces a Sunday.
 - GCatholic groups the Wednesday before Holy Thursday under a Triduum heading and Christmas
@@ -56,8 +68,8 @@ Neither is the official KWI ordo:
 
 ## Consequences
 
-- M1 can close with golden coverage of 2024, 2026 and 2027 instead of 2000-2100. More years
-  require more reference data, ideally the KWI ordo.
+- M1 closes with golden coverage of 2024 to 2029 (2023 is missing) instead of 2000-2100.
+  More years require more reference data, ideally the KWI ordo.
 - Adding a year means adding a fixture entry with its source, nothing else.
 - Before using GCatholic or Avitalia data beyond tests (for example to build calendar data
   files), ask the owners for permission. This ADR only covers using them to check our own

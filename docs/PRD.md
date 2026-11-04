@@ -189,7 +189,7 @@ Exit criteria:
 
 - [x] Anchors and seasons match the chosen reference for every year it covers. **Changed
   from the original "every year in 2000-2100"**: the available secondary sources cover only
-  2024, 2026 and 2027 (Sundays with a season and week number, selected weekdays, and
+  2024 to 2029 (Sundays with a season and week number, selected weekdays, and
   movable days). Wider coverage needs the KWI ordo or another reference.
 - [x] Property tests pass (seasons follow the liturgical order with no gaps or overlaps,
   week numbering is consistent, checked for 1900-2200 with both Epiphany settings).
@@ -198,7 +198,7 @@ Exit criteria:
 Status notes:
 
 - Golden tests are in `packages/core/src/reference.test.ts`. The sources are secondary
-  (GCatholic.org and a blog), not the official ordo, and the 8 January Baptism case (2023)
+  (GCatholic.org and a blog), not the official ordo, and the case of Epiphany on 8 January (2023)
   is not covered by any reference. M3 repeats the comparison against the KWI ordo.
 - Conventions that need liturgist review before they are relied on: the week number of Lent
   weekdays before the first Sunday (0) and of Holy Week (6), Easter Sunday through Pentecost
@@ -305,10 +305,10 @@ Exit criteria:
 
 1. Resolved for M1 by [ADR-0002](adr/0002-reference-sources-for-golden-tests.md)
    (GCatholic.org and Avitalia as secondary references, facts-only fixtures). Still open:
-   the reference for M2 (rank and color per day) and for years outside 2024-2027.
+   the reference for M2 (rank and color per day) and for years outside 2024-2029.
 2. What are the correct regional settings for Indonesia (Epiphany, Ascension, Corpus Christi,
    holy days of obligation)? The references show Epiphany on Sunday, Ascension on Thursday and
-   Corpus Christi on Sunday for 2024-2027, but this must be verified from KWI documents. The
+   Corpus Christi on Sunday for 2024-2029, but this must be verified from KWI documents. The
    holy days of obligation are not stated by either source.
 3. Will KWI grant permission for names and texts, and who is the contact?
 4. Which dioceses and orders come first in M6?

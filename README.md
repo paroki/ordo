@@ -3,7 +3,7 @@
 An open source generator for the Catholic liturgical calendar.
 
 > Status: **M1 done**. Liturgical seasons, movable days and lectionary cycles are
-> available and checked against reference calendars for 2024, 2026 and 2027. Celebrations
+> available and checked against reference calendars for 2024 to 2029. Celebrations
 > (saints, solemnities, precedence) are not implemented yet.
 
 ## Principles
