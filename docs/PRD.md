@@ -309,7 +309,9 @@ Exit criteria:
 2. What are the correct regional settings for Indonesia (Epiphany, Ascension, Corpus Christi,
    holy days of obligation)? The references show Epiphany on Sunday, Ascension on Thursday and
    Corpus Christi on Sunday for 2024-2029, but this must be verified from KWI documents. The
-   holy days of obligation are not stated by either source.
+   holy days of obligation are not stated by either source. The maintainer recalls that
+   Indonesia follows the Vatican for Epiphany; the references show a Sunday Epiphany every
+   year from 2024 to 2029 instead, so this conflict must be settled from a KWI document.
 3. Will KWI grant permission for names and texts, and who is the contact?
 4. Which dioceses and orders come first in M6?
 5. Where is the web app hosted, and who maintains it?

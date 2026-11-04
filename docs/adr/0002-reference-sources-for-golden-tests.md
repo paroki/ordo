@@ -17,6 +17,11 @@ settings used in Indonesia. The maintainer proposed two sources:
    shows a liturgical color and rank wording per day, names no source and shows no license.
    It stays a candidate for color checks in M2 if a way to query it by month and year is
    found.
+4. vatican.va, "Calendar of Celebrations 2023" (Liturgy Office of the Holy See). Not usable:
+   the page does not say which calendar it represents (the surrounding links suggest the
+   celebrations presided by the Pope), its daily entries did not load in our page reader, and
+   it makes no statement about the practice of any country, so it cannot settle how
+   Indonesia places Epiphany.
 
 Neither is the official KWI ordo:
 
