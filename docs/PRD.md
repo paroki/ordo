@@ -152,16 +152,16 @@ an `edition` and `validFrom`, so different years can follow different editions.
 
 Status legend: done, in progress, planned.
 
-| Milestone | Title                          | Release | Status  |
-| --------- | ------------------------------ | ------- | ------- |
-| M0        | Foundation                     | -       | done    |
-| M1        | Liturgical time                | -       | planned |
-| M2        | General Roman Calendar         | -       | planned |
-| M3        | Indonesian calendar and locale | -       | planned |
-| M4        | Web app and exports            | v0.1    | planned |
-| M5        | Readings references            | v0.2    | planned |
-| M6        | Diocesan calendars and PDF     | v0.3    | planned |
-| M7        | More countries and public API  | v1.0    | planned |
+| Milestone | Title                          | Release | Status      |
+| --------- | ------------------------------ | ------- | ----------- |
+| M0        | Foundation                     | -       | done        |
+| M1        | Liturgical time                | -       | in progress |
+| M2        | General Roman Calendar         | -       | planned     |
+| M3        | Indonesian calendar and locale | -       | planned     |
+| M4        | Web app and exports            | v0.1    | planned     |
+| M5        | Readings references            | v0.2    | planned     |
+| M6        | Diocesan calendars and PDF     | v0.3    | planned     |
+| M7        | More countries and public API  | v1.0    | planned     |
 
 ### M0: Foundation (done)
 
@@ -171,25 +171,39 @@ Status legend: done, in progress, planned.
 - [x] ADR-0001, MIT license, README
 - [x] `AGENTS.md` (with `CLAUDE.md` and `GEMINI.md` pointing to it) and the emoji commit convention
 
-### M1: Liturgical time
+### M1: Liturgical time (in progress)
 
 Scope: everything derived from Easter and Christmas, no celebration data yet.
 
-- [ ] Movable days from Easter (Ash Wednesday, Palm Sunday, Triduum, Ascension, Pentecost,
+- [x] Movable days from Easter (Ash Wednesday, Palm Sunday, Triduum, Ascension, Pentecost,
   Trinity Sunday, Corpus Christi, Sacred Heart, Immaculate Heart of Mary)
-- [ ] Advent, Christmas season anchors, Holy Family, Epiphany and Baptism of the Lord
-- [ ] Ordinary Time parts I and II with correct week numbering (Christ the King is week 34)
-- [ ] Season for any date, with season week
-- [ ] Sunday cycle (A/B/C) and weekday cycle (I/II)
-- [ ] Regional settings object (Epiphany, Ascension, Corpus Christi) with documented defaults
+- [x] Advent, Christmas season anchors, Holy Family, Epiphany and Baptism of the Lord
+- [x] Ordinary Time parts I and II with correct week numbering (Christ the King is week 34)
+- [x] Season for any date, with season week
+- [x] Sunday cycle (A/B/C) and weekday cycle (I/II)
+- [x] Regional settings object (Epiphany, Ascension, Corpus Christi) with General Roman
+  Calendar defaults
 - [ ] Reference calendar chosen and recorded in an ADR (see open questions)
 
 Exit criteria:
 
-- Anchors and seasons match the chosen reference for every year in 2000-2100.
-- Property tests pass (for example: season boundaries are contiguous and non-overlapping,
-  every date in a year belongs to exactly one season).
-- Public API documented in the README with examples.
+- [ ] Anchors and seasons match the chosen reference for every year in 2000-2100.
+- [x] Property tests pass (seasons follow the liturgical order with no gaps or overlaps,
+  week numbering is consistent, checked for 1900-2200 with both Epiphany settings).
+- [x] Public API documented in the README with examples.
+
+Status notes:
+
+- Current tests are hand-derived spot checks (2018, 2025, 2026) plus property tests. Two
+  edge cases were cross-checked against web sources by page title only (Monday of Week 8 on
+  25 May 2026; Baptism of the Lord on Monday 8 January 2018). This is not a substitute for
+  the golden comparison in the exit criteria above.
+- Conventions that need liturgist review before they are relied on: the week number of Lent
+  weekdays before the first Sunday (0) and of Holy Week (6), Easter Sunday through Pentecost
+  as weeks 1-8, and the weekday cycle applied by civil year for every day (the readings
+  milestone M5 decides how it is used outside Ordinary Time).
+- Settings defaults are General Roman Calendar values, not Indonesian ones (see open
+  question 2).
 
 ### M2: General Roman Calendar
 

@@ -2,7 +2,8 @@
 
 An open source generator for the Catholic liturgical calendar.
 
-> Status: **M0** (skeleton). Nothing can be generated yet except the date of Easter.
+> Status: **M1 in progress**. Liturgical seasons, movable days and lectionary cycles are
+> available. Celebrations (saints, solemnities, precedence) are not implemented yet.
 
 ## Principles
 
@@ -25,10 +26,22 @@ bun run check   # lint + typecheck + test
 ## Example
 
 ```ts
-import { easter } from "@ordo/core";
+import { easter, getAnchors, getLiturgicalTime } from "@ordo/core";
 
 easter(2026); // "2026-04-05"
+
+getAnchors(2026).pentecost; // "2026-05-24"
+
+getLiturgicalTime("2026-05-25");
+// { season: "ordinary-time", week: 8, holyWeek: false, date: "2026-05-25",
+//   weekday: 1, sundayCycle: "A", weekdayCycle: "II" }
+
+// Regional options (defaults follow the General Roman Calendar)
+getAnchors(2026, { ascension: "sunday" }).ascension; // "2026-05-17"
 ```
+
+Weeks are numbered by the most recent Sunday of the season. The Christmas season and the
+Triduum have no week number.
 
 ## Contributing
 
