@@ -48,3 +48,18 @@ export function dayOfWeek(date: IsoDate): number {
   // 1970-01-01 was a Thursday (4).
   return (((toEpochDay(date) + 4) % 7) + 7) % 7;
 }
+
+/** The year component of a date. */
+export function yearOf(date: IsoDate): number {
+  return Number(date.slice(0, date.indexOf("-")));
+}
+
+/** The first Sunday on or after `date` (the date itself when it is a Sunday). */
+export function sundayOnOrAfter(date: IsoDate): IsoDate {
+  return addDays(date, (7 - dayOfWeek(date)) % 7);
+}
+
+/** The first Sunday strictly after `date`. */
+export function sundayAfter(date: IsoDate): IsoDate {
+  return addDays(date, 7 - dayOfWeek(date));
+}
