@@ -123,7 +123,7 @@ The exact types are defined in `@ordo/core`; this is the shape product requireme
 type LiturgicalDay = {
   date: string; // "2026-11-29"
   season: Season;
-  seasonWeek?: number;
+  week?: number;
   weekday: number; // 0 = Sunday
   celebrations: Celebration[]; // all candidates, ordered by precedence
   primary: Celebration; // the winner
@@ -152,16 +152,16 @@ an `edition` and `validFrom`, so different years can follow different editions.
 
 Status legend: done, in progress, planned.
 
-| Milestone | Title                          | Release | Status  |
-| --------- | ------------------------------ | ------- | ------- |
-| M0        | Foundation                     | -       | done    |
-| M1        | Liturgical time                | -       | done    |
-| M2        | General Roman Calendar         | -       | planned |
-| M3        | Indonesian calendar and locale | -       | planned |
-| M4        | Web app and exports            | v0.1    | planned |
-| M5        | Readings references            | v0.2    | planned |
-| M6        | Diocesan calendars and PDF     | v0.3    | planned |
-| M7        | More countries and public API  | v1.0    | planned |
+| Milestone | Title                          | Release | Status      |
+| --------- | ------------------------------ | ------- | ----------- |
+| M0        | Foundation                     | -       | done        |
+| M1        | Liturgical time                | -       | done        |
+| M2        | General Roman Calendar         | -       | in progress |
+| M3        | Indonesian calendar and locale | -       | planned     |
+| M4        | Web app and exports            | v0.1    | planned     |
+| M5        | Readings references            | v0.2    | planned     |
+| M6        | Diocesan calendars and PDF     | v0.3    | planned     |
+| M7        | More countries and public API  | v1.0    | planned     |
 
 ### M0: Foundation (done)
 
@@ -225,6 +225,16 @@ Exit criteria:
 - Sampled difficult years (for example 2008, 2016, 2024, 2026) match the reference on every
   day for rank, color and winner.
 - Every transfer rule has at least one dedicated test case.
+
+Status notes:
+
+- Phase 1 (ADR-0003, proposed) is written; engine, data and API are not started.
+- Baseline: the General Roman Calendar as printed in the Missale Romanum, editio typica tertia
+  (2002). Decrees after 2002 are deferred until after the MVP (maintainer decision,
+  2026-11-04). Golden years 2016, 2024 and 2026 will therefore carry decree-affected days as
+  known differences, and the exit criterion above is recorded as **met except decree-affected
+  days**, not as met. See [ADR-0003](adr/0003-general-roman-calendar-and-precedence.md).
+- Nine open questions (Q1-Q9 in ADR-0003) must be answered before the data phase.
 
 ### M3: Indonesian calendar and locale
 
