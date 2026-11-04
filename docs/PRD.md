@@ -1,7 +1,7 @@
 # Ordo: Product Requirements Document
 
 - Status: draft 0.1
-- Last updated: 2026-11-03
+- Last updated: 2026-11-04
 - Owner: Paroki Developers
 - Related: [ADR-0001](adr/0001-scope-and-architecture.md), [AGENTS.md](../AGENTS.md)
 
@@ -152,16 +152,16 @@ an `edition` and `validFrom`, so different years can follow different editions.
 
 Status legend: done, in progress, planned.
 
-| Milestone | Title                          | Release | Status      |
-| --------- | ------------------------------ | ------- | ----------- |
-| M0        | Foundation                     | -       | done        |
-| M1        | Liturgical time                | -       | in progress |
-| M2        | General Roman Calendar         | -       | planned     |
-| M3        | Indonesian calendar and locale | -       | planned     |
-| M4        | Web app and exports            | v0.1    | planned     |
-| M5        | Readings references            | v0.2    | planned     |
-| M6        | Diocesan calendars and PDF     | v0.3    | planned     |
-| M7        | More countries and public API  | v1.0    | planned     |
+| Milestone | Title                          | Release | Status  |
+| --------- | ------------------------------ | ------- | ------- |
+| M0        | Foundation                     | -       | done    |
+| M1        | Liturgical time                | -       | done    |
+| M2        | General Roman Calendar         | -       | planned |
+| M3        | Indonesian calendar and locale | -       | planned |
+| M4        | Web app and exports            | v0.1    | planned |
+| M5        | Readings references            | v0.2    | planned |
+| M6        | Diocesan calendars and PDF     | v0.3    | planned |
+| M7        | More countries and public API  | v1.0    | planned |
 
 ### M0: Foundation (done)
 
@@ -171,7 +171,7 @@ Status legend: done, in progress, planned.
 - [x] ADR-0001, MIT license, README
 - [x] `AGENTS.md` (with `CLAUDE.md` and `GEMINI.md` pointing to it) and the emoji commit convention
 
-### M1: Liturgical time (in progress)
+### M1: Liturgical time (done, with limited golden coverage)
 
 Scope: everything derived from Easter and Christmas, no celebration data yet.
 
@@ -183,27 +183,30 @@ Scope: everything derived from Easter and Christmas, no celebration data yet.
 - [x] Sunday cycle (A/B/C) and weekday cycle (I/II)
 - [x] Regional settings object (Epiphany, Ascension, Corpus Christi) with General Roman
   Calendar defaults
-- [ ] Reference calendar chosen and recorded in an ADR (see open questions)
+- [x] Reference calendar chosen and recorded in an ADR ([ADR-0002](adr/0002-reference-sources-for-golden-tests.md))
 
 Exit criteria:
 
-- [ ] Anchors and seasons match the chosen reference for every year in 2000-2100.
+- [x] Anchors and seasons match the chosen reference for every year it covers. **Changed
+  from the original "every year in 2000-2100"**: the available secondary sources cover only
+  2024, 2026 and 2027 (Sundays with a season and week number, selected weekdays, and
+  movable days). Wider coverage needs the KWI ordo or another reference.
 - [x] Property tests pass (seasons follow the liturgical order with no gaps or overlaps,
   week numbering is consistent, checked for 1900-2200 with both Epiphany settings).
 - [x] Public API documented in the README with examples.
 
 Status notes:
 
-- Current tests are hand-derived spot checks (2018, 2025, 2026) plus property tests. Two
-  edge cases were cross-checked against web sources by page title only (Monday of Week 8 on
-  25 May 2026; Baptism of the Lord on Monday 8 January 2018). This is not a substitute for
-  the golden comparison in the exit criteria above.
+- Golden tests are in `packages/core/src/reference.test.ts`. The sources are secondary
+  (GCatholic.org and a blog), not the official ordo, and the 8 January Baptism case (2023)
+  is not covered by any reference. M3 repeats the comparison against the KWI ordo.
 - Conventions that need liturgist review before they are relied on: the week number of Lent
   weekdays before the first Sunday (0) and of Holy Week (6), Easter Sunday through Pentecost
   as weeks 1-8, and the weekday cycle applied by civil year for every day (the readings
   milestone M5 decides how it is used outside Ordinary Time).
-- Settings defaults are General Roman Calendar values, not Indonesian ones (see open
-  question 2).
+- Settings defaults are General Roman Calendar values, not Indonesian ones. The Indonesian
+  values observed in the references are recorded in ADR-0002 and are not shipped until
+  verified (see open question 2).
 
 ### M2: General Roman Calendar
 
@@ -300,14 +303,19 @@ Exit criteria:
 
 ## 12. Open questions
 
-1. Which independent reference calendar do we use for golden tests in M1 and M2, and where is
-   it stored (fixtures, with license check)?
+1. Resolved for M1 by [ADR-0002](adr/0002-reference-sources-for-golden-tests.md)
+   (GCatholic.org and Avitalia as secondary references, facts-only fixtures). Still open:
+   the reference for M2 (rank and color per day) and for years outside 2024-2027.
 2. What are the correct regional settings for Indonesia (Epiphany, Ascension, Corpus Christi,
-   holy days of obligation)? To be verified from KWI documents, not assumed.
+   holy days of obligation)? The references show Epiphany on Sunday, Ascension on Thursday and
+   Corpus Christi on Sunday for 2024-2027, but this must be verified from KWI documents. The
+   holy days of obligation are not stated by either source.
 3. Will KWI grant permission for names and texts, and who is the contact?
 4. Which dioceses and orders come first in M6?
 5. Where is the web app hosted, and who maintains it?
 6. Text licensing for readings (for example Indonesian Bible translations) before M5.
+7. Do we want the psalter week (I-IV) of the Liturgy of the Hours? The reference calendars
+   print it next to many days, and it is a pure function of the season and week.
 
 ## 13. Glossary
 

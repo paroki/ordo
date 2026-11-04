@@ -84,6 +84,9 @@ This project produces data people will rely on for worship planning.
 - Behavior must be verified with golden tests against an official or independent reference
   calendar (for example sampled years such as 2008, 2016, 2024, 2026) plus property tests
   (for example: Easter is always a Sunday between 22 March and 25 April).
+- Reference fixtures (`*.fixtures.ts`) store facts only (dates, seasons, week numbers, ranks),
+  never names or texts copied from a source, and record the source of every year. Which
+  sources are accepted, and their limits, is in [ADR-0002](docs/adr/0002-reference-sources-for-golden-tests.md).
 - If a rule is ambiguous, stop and document the question in an ADR or issue instead of
   guessing.
 
