@@ -1,6 +1,6 @@
 # ADR-0003: General Roman Calendar data, precedence and transfers (milestone M2)
 
-- Status: proposed
+- Status: accepted
 - Date: 2026-11-04
 
 ## Context

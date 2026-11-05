@@ -228,7 +228,7 @@ Exit criteria:
 
 Status notes:
 
-- Phase 1 (ADR-0003, proposed) is written; engine, data and API are not started.
+- Phase 1 (ADR-0003, accepted) is written; engine, data and API are not started.
 - Baseline: the General Roman Calendar as printed in the Missale Romanum, editio typica tertia
   (2002). Decrees after 2002 are deferred until after the MVP (maintainer decision,
   2026-11-04). Golden years 2016, 2024 and 2026 will therefore carry decree-affected days as
