@@ -213,9 +213,10 @@ Status notes:
 Scope: fixed celebrations and the precedence engine for `general`.
 
 - [ ] `packages/data` with `calendars/general.json` (facts only, source recorded)
-- [ ] Fixed and offset-based placement of celebrations
-- [ ] Precedence resolver based on the Table of Liturgical Days
-- [ ] Transfer and suppression rules (solemnities, Lent and Holy Week restrictions)
+- [x] Fixed and offset-based placement of celebrations (engine, tested with synthetic calendars)
+- [x] Precedence resolver based on the Table of Liturgical Days (engine, tested with synthetic calendars)
+- [x] Transfer and suppression rules (solemnities, Lent and Holy Week restrictions) (engine; the
+  general data and the golden years are not checked yet)
 - [ ] Liturgical color per day
 - [ ] `tools/validate`: JSON schema, unique IDs, valid slugs, run in CI
 - [ ] `generateYear(year, { calendar: "general" })` and `generateDay`
@@ -228,7 +229,10 @@ Exit criteria:
 
 Status notes:
 
-- Phase 1 (ADR-0003, accepted) is written; engine, data and API are not started.
+- Phase 1 (ADR-0003, accepted) and Phase 2 (engine in `@ordo/core` with synthetic calendars,
+  Amendment 1 of the ADR) are written. Data, `tools/validate` and the golden tests are not started.
+  The color mechanism exists, but no color value is stored until Phase 3, so "Liturgical color per
+  day" stays unchecked. The exit criteria are not yet evaluated.
 - Baseline: the General Roman Calendar as printed in the Missale Romanum, editio typica tertia
   (2002). Decrees after 2002 are deferred until after the MVP (maintainer decision,
   2026-11-04). Golden years 2016, 2024 and 2026 will therefore carry decree-affected days as

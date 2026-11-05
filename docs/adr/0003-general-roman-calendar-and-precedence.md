@@ -300,3 +300,69 @@ until an official text is supplied; each is checked by a golden test where a ref
 - `general.json` is limited to S1 until the decrees phase. This is recorded in the PRD.
 - The engine stays pure: dates are `IsoDate`, ids are slugs, nothing is a display string.
 - Text from S1 is not stored. The Table above is a paraphrase in our own words.
+
+## Amendment 1: engine details settled in Phase 2 (proposed, awaiting maintainer review)
+
+The accepted decisions stay as written. Implementing the engine needed the details below. None
+of them states a liturgical fact: facts still come only from S1 and from the rules R1-R26. Items
+marked UNVERIFIED are engine choices where S1 gives no rule.
+
+1. **Two optional entry fields.** The Table separates feasts of the Lord (level 5) from other
+   feasts (level 7) and places the Nativity and the Epiphany at level 2, but decision 4a had only
+   `rank`. Entries may carry `lord: true` (only with `rank: "feast"`) and `level: 2` (only with
+   `rank: "solemnity"`). Phase 3 sets them from S1, entry by entry, with the paragraph cited.
+2. **Colors of derived days live in the calendar file.** The calendar has a `timeColors` object:
+   `seasons` (one color per season, including the Triduum) and `overrides` (by derived id, with
+   optional alternative colors, for example rose). The color of a derived day is
+   `overrides[id]`, otherwise `seasons[season]`. This keeps every color in data (architecture
+   rule 4) and follows Q2. R24 and R26 become two overrides (`holy-saturday`, `holy-thursday`),
+   R23 stays on the All Souls entry. Phase 3 fills the object from GIRM n. 346 with the paragraph
+   cited per value. The engine contains no color.
+3. **Dated transfer exceptions.** Decision 4f left the shape to Phase 2. An entry may carry
+   `transfers: [{ from, to, target }]`, each an anchor plus offset. When the entry is impeded on a
+   date between `from` and `to` (inclusive), the search for a free day starts at `target`
+   instead of the day after. R21 and R22 are data of this form (UNVERIFIED, see Q1).
+4. **Free day.** A day is free when its primary has Table level 9 or a larger number (9 to 13, so no
+   day of levels 1-8 is there) and no other solemnity has been moved to it. The search then goes forward day by day
+   from the start day. A search that would leave the civil year is an error (decision 4f).
+   Impeded solemnities are processed by date, then Table level, then id.
+5. **Same-level ties (UNVERIFIED, S1 has no rule, see Q6).** Order inside a level: movable
+   entries first, then id. Of two solemnities of one level the first is celebrated and the
+   second is moved by the generic search. Of two obligatory memorials the first is the primary
+   and the second is `optional` (this is R25 for the Immaculate Heart of Mary). Of two feasts
+   the second is `suppressed`.
+6. **Memorials on level 9 days.** R10 (Lent) turns an obligatory memorial into an optional one
+   (level 12). On 17-24 December and in the Christmas octave an obligatory memorial is
+   `suppressed`, by R12 and R3. Optional memorials stay `optional` on level 9 and level 13 days
+   (R16) and are `suppressed` on every higher day.
+7. **The weekday stays listed.** When a higher celebration is the primary, the weekday of the
+   Proper of Time stays in `celebrations` with status `suppressed`. The weekday cycles still
+   come from `LiturgicalTime`.
+8. **Saturday memorial of Mary (R11).** The engine derives the candidate
+   `saturday-memorial-of-mary` (optional memorial, level 12) on every Saturday of Ordinary
+   Time. Its color is `timeColors.overrides["saturday-memorial-of-mary"]`, which a calendar must
+   define.
+9. **Easter Sunday.** The Table text in this ADR puts Easter Sunday among the Sundays of Easter
+   (level 2) and the Triduum at level 1. Whether Easter Sunday also belongs to level 1 is not
+   settled here. It changes no output, since no celebration can compete with it at level 1 or 2.
+   Checked against n. 59 when the Table is next read.
+10. **Derived ids.** In addition to decision 4e: `christmas-dec-25` is the weekday under the
+    Nativity, `christmas-jan-01` is the weekday under 1 January, and `ordinary-time-w<n>-<day>`,
+    `easter-octave-<day>` and the other names follow 4e. Derived ranks: `sunday` for every
+    Sunday, `triduum` for Holy Thursday to Holy Saturday, `solemnity` for Ascension, Pentecost
+    and the octave days, `weekday` otherwise.
+11. **Order of `celebrations`.** By Table level, so an optional memorial (level 12) is listed
+    before a level 13 weekday that is the primary. Use `primary` to find the winner.
+
+### Phase 2 coverage
+
+| Rule                           | Test                                                                |
+| ------------------------------ | ------------------------------------------------------------------- |
+| R1, R2, R5, R6                 | `precedence.test.ts`, "R1, R2", "R5"                                |
+| R3, R4, R21, R22               | `precedence.test.ts`, "R3", "R4, R21, R22" (2008 and 2016 dates)    |
+| R10, R11, R12, R16, R25        | `precedence.test.ts`, "R10, R11, R12, R16"                          |
+| R15 and the Table levels       | `time-days.test.ts`                                                 |
+| R17, R24, R26 (mechanism only) | `precedence.test.ts`, "R17: color"                                  |
+| R7, R8, R9                     | M1 (`anchors.test.ts`), unchanged                                   |
+| R13, R14, R18-R20              | not implemented: Vespers is not modeled, and the rest belongs to M3 |
+| Properties                     | `generate.property.test.ts`, 2000-2100, run under three TZ values   |
