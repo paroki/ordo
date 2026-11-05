@@ -234,10 +234,10 @@ Status notes:
   2026-11-04). Golden years 2016, 2024 and 2026 will therefore carry decree-affected days as
   known differences, and the exit criterion above is recorded as **met except decree-affected
   days**, not as met. See [ADR-0003](adr/0003-general-roman-calendar-and-precedence.md).
-- One open question remains in ADR-0003 (Q10, Holy Thursday color). Several rules are accepted by the
+- No open question remains in ADR-0003. Several rules are accepted by the
   maintainer from a secondary source (romcal) or by decision and stay UNVERIFIED: St Joseph and the
   Annunciation around Easter (R21, R22), the Immaculate Heart with another memorial (R25), and the
-  color of Holy Saturday (R24). Color is stored explicitly per entry.
+  colors of Holy Saturday and Holy Thursday (R24, R26). Color is stored explicitly per entry.
 
 ### M3: Indonesian calendar and locale
 
