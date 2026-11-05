@@ -234,7 +234,9 @@ Status notes:
   2026-11-04). Golden years 2016, 2024 and 2026 will therefore carry decree-affected days as
   known differences, and the exit criterion above is recorded as **met except decree-affected
   days**, not as met. See [ADR-0003](adr/0003-general-roman-calendar-and-precedence.md).
-- Nine open questions (Q1-Q9 in ADR-0003) must be answered before the data phase.
+- Seven open questions (Q3-Q9 in ADR-0003) must be answered before the data phase. Q1 (St Joseph and
+  the Annunciation around Easter) is accepted from a secondary source (romcal) and stays UNVERIFIED;
+  Q2 is decided (explicit color per entry).
 
 ### M3: Indonesian calendar and locale
 
